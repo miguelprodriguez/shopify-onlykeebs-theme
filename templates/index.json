@@ -2,7 +2,10 @@
   "sections": {
     "main": {
       "type": "template-featured-collection"
+    }, 
+    "landing": {
+      "type": "landing-banner"
     }
   },
-  "order": ["main"]
+  "order": ["main", "landing"]
 }
