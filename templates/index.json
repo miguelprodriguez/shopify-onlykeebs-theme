@@ -1,11 +1,23 @@
 {
   "sections": {
     "main": {
-      "type": "template-featured-collection"
-    }, 
+      "type": "template-featured-collection",
+      "settings": {
+      }
+    },
     "landing": {
-      "type": "landing-banner"
+      "type": "landing-banner",
+      "settings": {
+        "banner_title": "Title of the Banner",
+        "banner_description": "Description of the Banner",
+        "button_link": "",
+        "button_label": "Shop",
+        "banner_image": "shopify:\/\/shop_images\/maxresdefault.jpg"
+      }
     }
   },
-  "order": ["main", "landing"]
+  "order": [
+    "main",
+    "landing"
+  ]
 }
