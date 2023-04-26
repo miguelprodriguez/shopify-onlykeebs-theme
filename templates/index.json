@@ -14,10 +14,14 @@
         "button_label": "Shop",
         "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp"
       }
+    }, 
+    "imageWithText": {
+      "type": "image-with-text"
     }
   },
   "order": [
     "main",
-    "landing"
+    "landing",
+    "imageWithText"
   ]
 }
