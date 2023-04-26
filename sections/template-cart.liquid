@@ -17,7 +17,7 @@
             <tbody>
               {% for item in cart.items %}
                 <tr class="table-row cart-item" data-key="{{ item.key }}">
-                  <td class="py-4 px-2 flex flex-col justify-center">
+                  <td class="py-4 px-2 flex flex-col justify-start">
                     <a href="{{ item.url }}">
                       {% if item.image %}
                         <img
@@ -31,7 +31,7 @@
 
                     </a>
                     <button class="remove-item text-sm font-medoum text-red-500 my-1">
-                      remove
+                      {% render 'icon-trash' %}
                     </button>
                   </td>
                   <td class="hidden lg:table-cell">
@@ -42,7 +42,6 @@
                       <input
                         name="updates[]"
                         value="{{ item.quantity }}"
-                        id="updates_{{ forloop.index }}"
                         class="w-20-border p-2 text-black outline-none">
                       <button type="button" class="plus rounded-r-xl border-2 border-white p-2">
                         {% render 'icon-plus' %}
@@ -53,13 +52,18 @@
                     <p class="line-item-price">
                       {{ item.line_price | money }}
                     </p>
-                    <input
-                      type="number"
-                      name="updates[]"
-                      value="{{ item.quantity }}"
-                      min="1"
-                      id="updates_{{ forloop.index }}"
-                      class="w-20-border p-2 text-black table-cell rounded-md outline-none lg:hidden my-4">
+                    <div class="cart-quantity-selector flex align-center lg:hidden">
+                      <button type="button" class="minus rounded-l-xl border-2 border-white p-2">
+                        {% render 'icon-minus' %}
+                      </button>
+                      <input
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        class="w-20-border p-2 text-black table-cell outline-none">
+                      <button type="button" class="plus rounded-r-xl border-2 border-white p-2">
+                        {% render 'icon-plus' %}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               {% endfor %}
