@@ -48,7 +48,7 @@
                       </button>
                     </div>
                   </td>
-                  <td class="py-4 px-2 cart-item " data-key="{{ item.key }}">
+                  <td class="py-4 px-2 cart-item" data-key="{{ item.key }}">
                     <p class="line-item-price">
                       {{ item.line_price | money }}
                     </p>
@@ -59,7 +59,8 @@
                       <input
                         name="updates[]"
                         value="{{ item.quantity }}"
-                        class="w-20-border p-2 text-black table-cell outline-none">
+                        class="p-2 text-black outline-none"
+                        size="3">
                       <button type="button" class="plus rounded-r-xl border-2 border-white p-2">
                         {% render 'icon-plus' %}
                       </button>
