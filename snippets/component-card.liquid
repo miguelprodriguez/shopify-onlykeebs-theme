@@ -1,0 +1,44 @@
+<div class='hover:text-black hover:bg-zinc-100 rounded-xl items-start gap-2 flex flex-col h-full w-full'>
+  <a href="{{ productProp.url }}" class="w-full">
+    <img
+      src="{{ productProp.featured_image | img_url: 'large' }}"
+      alt="{{ productProp.featured_image.alt }}"
+      class="object-cover rounded-xl w-full">
+  </a>
+  <div class="p-5 rounded-xl flex flex-col flex-1 gap-4 w-full">
+
+    <a class="flex-1 text-xl mb-2" href="{{ productProp.url }}">
+      {{ productProp.title }}
+    </a>
+
+    {% if productProp.compare_at_price != blank %}
+      <div class="flex gap-2">
+        <p>{{ productProp.price | money }}</p>
+        <strong>
+          <s class="text-red-500">{{ productProp.compare_at_price | money }}</s>
+        </strong>
+      </div>
+    {% else %}
+      {% if productProp.price_min != productProp.price_max %}
+        <p>{{ productProp.price_min | money }} - {{ productProp.price_max | money }}</p>
+      {% else %}
+        <p>{{ productProp.price | money }}</p>
+      {% endif %}
+    {% endif %}
+
+
+    {% if isAddtoCartButtonShownProp == true %}
+      <form action="/cart/add" method="post">
+        <input
+          type="hidden"
+          name="id"
+          value="{{ productProp.variants.first.id }}" />
+        <button
+          type="button"
+          name="add"
+          value="Add to cart"
+          class="cart-button bg-green-700 text-white hover:bg-green-800 rounded-xl p-4 z-10 w-full">Add to cart</button>
+      </form>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<form action="{{routes.search_url}}" class="flex gap-5 w-full">
+  <input
+    type="search"
+    name="q"
+    placeholder="{{ placeholderProp }}"
+    value="{{ search.terms | escape }}"
+    class="border-2 border-blue-900 text-black outline-0 p-2 rounded-xl focus:border-violet-800 flex-1">
+  <button type="submit">
+    {% render 'icon-search' %}
+  </button>
+</form>

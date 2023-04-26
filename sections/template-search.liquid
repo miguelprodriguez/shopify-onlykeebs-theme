@@ -1,0 +1,49 @@
+<div class="container mx-auto p-8">
+  {% if section.settings.is_search_title_shown %}
+    <h1 class="text-3xl font-bold text-center my-8">Search results</h1>
+  {% endif %}
+  {% paginate search.results by 9 %}
+    <div class="flex justify-center items-center my-4 w-full">
+      {% render 'component-search-form' %}
+    </div>
+
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <div class="{% if search.results.size > 2 %} grid grid-cols-1 md:grid-cols-3 {%else%} justify-center flex flex-wrap md:flex-nowrap{% endif %} gap-5">
+          {% for result in search.results %}
+            {% case result.object_type %}
+              {% when 'product' %}
+              {% render 'component-card', productProp: result, indexProp: forloop.index, isAddtoCartButtonShownProp: section.settings.is_add_to_cart_buttons_shown %}
+          {% else %}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="pt-10 text-xl text-center">
+          <p>No results found</p>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% comment %} {% render 'pagination', pagination: paginate %} {% endcomment %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "is_search_title_shown",
+        "default": true,
+        "label": "Show search title"
+      }, {
+        "type": "checkbox",
+        "id": "is_add_to_cart_buttons_shown",
+        "default": true,
+        "label": "Display add to cart buttons"
+      }
+    ]
+  }
+{% endschema %}

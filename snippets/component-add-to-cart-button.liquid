@@ -1,0 +1,146 @@
+<form
+  action="/cart/add"
+  method="post"
+  class="text-black flex flex-col gap-4"
+  ></form>
+  {% if variantProp.variants.size > 1 and isVariantShownProp %}
+    <div>
+      <label class="text-white" for="productSelect">
+        <strong>Variant</strong>
+      </label>
+      <br/>
+      <select class="text-black" name="id" id="productSelect">
+        {% for variant in variantProp.variants %}
+          {% if variant.available %}
+            <option value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money_with_currency }}
+            </option>
+          {% else %}
+            <option disabled="disabled">
+              {{ variant.title }} - sold out
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  {% else %}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ variantProp.variants.first.id }}" />
+  {% endif %}
+
+  {% if isQuantityShownProp %}
+    <div>
+      <label class="text-white" for="quantity">
+        <strong>Quantity</strong>
+      </label>
+      <br/>
+      <input
+        class="text-black my-4 p-2 rounded-md outline-none"
+        type="number"
+        id="quantity"
+        name="quantity"
+        value="1"
+        min="1">
+    </div>
+  {% endif %}
+
+
+  <button
+    class="add-to-cart bg-green-700 text-white hover:bg-green-600 rounded-xl p-4 z-10 w-full"
+    type="submit"
+    name="add"
+    value="Add to cart"
+    id="AddToCart">Add to cart</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  document.querySelector('.add-to-cart').addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const variantID =  document.querySelector("#productSelect")?.value || '{{ variantProp.variants.first.id }}'
+    const variantQuantity =  document.querySelector("#quantity").value
+
+    console.log("Test variable: ", variantID)
+
+    axios
+    .post('/cart/add.js', {
+      id: variantID,
+      quantity: variantQuantity
+    }).then(res => {
+      const format = '{{ shop.money_format }}'
+
+      const cartNotification =  document.querySelector(".cart-notification")
+      
+      cartNotification.classList.remove('hidden')
+      cartNotification.innerHTML = `
+      <div class="flex justify-between">
+        <h2 class="text-large">Added to Cart</h2>
+        <button type="button" onClick="closeCartNotification()">X</button>
+      </div>
+      <div class="flex mb-8 items-center gap-2">
+        <img class="h-20 w-20" src="${res.data.featured_image.url}" alt="${res.data.featured_image.alt}">
+        <div>
+          <h3 class="cart-notification-price text-large">${res.data.title}</h3>
+          <p class="cart-notification-price text-large">Price: ${formatMoney(res.data.final_line_price, format)}</p>
+          <p class="cart-notification-quantity text-large">Quantity: ${res.data.quantity}</p>
+        </div>
+      </div>
+      <a class="text-white bg-green-700 hover:bg-green-600 rounded-xl p-4 z-10 w-full" href="/cart">View my cart</a>
+      <button type="submit" name="checkout">Checkout</button>
+      `
+    })
+  })
+
+  const formatMoney = (cents, format) => {
+    if (typeof cents == 'string') {
+      cents = cents.replace('.', '');
+    }
+    var value = '';
+    var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+    var formatString = (format || this.money_format);
+
+    const defaultOption = (opt, def) => {
+      return(
+        typeof opt == 'undefined'
+          ? def
+          : opt
+      );
+    }
+
+    const formatWithDelimiters = (number, precision, thousands, decimal) => {
+      precision = defaultOption(precision, 2);
+      thousands = defaultOption(thousands, ',');
+      decimal = defaultOption(decimal, '.');
+
+      if (isNaN(number) || number == null) {
+        return 0;
+      }
+
+      number = (number / 100.0).toFixed(precision);
+
+      var parts = number.split('.'),
+        dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+        cents = parts[1]
+          ? (decimal + parts[1])
+          : '';
+
+      return dollars + cents;
+    }
+
+    switch (formatString.match(placeholderRegex)[1]) {
+      case 'amount': value = formatWithDelimiters(cents, 2);
+        break;
+      case 'amount_no_decimals': value = formatWithDelimiters(cents, 0);
+        break;
+      case 'amount_with_comma_separator': value = formatWithDelimiters(cents, 2, '.', ',');
+        break;
+      case 'amount_no_decimals_with_comma_separator': value = formatWithDelimiters(cents, 0, '.', ',');
+        break;
+    }
+
+    return formatString.replace(placeholderRegex, value);
+  };
+</script>

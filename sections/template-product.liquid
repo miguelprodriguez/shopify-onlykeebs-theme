@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<style>
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: black
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    color: green
+  }
+  .swiper-pagination-bullet-active {
+    background-color: black
+  }
+  .swiper-pagination-bullet:hover {
+    background-color: green
+  }
+  .swiper-pagination-bullet-active:hover {
+    background-color: green
+  }
+  .swiper-slide-thumb-active {
+    opacity: 1 !important;
+  }
+  @media only screen and (min-width: 1024px) {
+    .mySwiperMobile {
+      display: none !important;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .mySwiperWeb,
+    .mySwiperWeb2 {
+      display: none !important;
+    }
+  }
+</style>
+
+{% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+  <div class="container mx-auto p-8">
+  <h1 class="text-3xl font-bold text-center my-8">{{ product.title }}</h1>
+
+  <!-- Swiper -->
+  <div class="flex align-center flex-wrap gap-8">
+
+    {% comment %} Mobile Carousel {% endcomment %}
+    <div class="swiper mySwiperMobile basis-full lg:basis-2/5 hidden">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          <div class="swiper-slide">
+            {% render 'component-media', media: media %}
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if product.media.size > 1 %}
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      {% endif %}
+    </div>
+
+    {% comment %} Web Carousel {% endcomment %}
+    <div class="w-1/2">
+      <div class="swiper mySwiperWeb2 h-4/6 w-full mb-4">
+        <div class="swiper-wrapper">
+          {% for media in product.media %}
+            <div class="swiper-slide">
+              {% render 'component-media', media: media %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div thumbsSlider="" class="swiper mySwiperWeb h-1/5 w-full py-2.5">
+        <div class="swiper-wrapper">
+          {% for media in product.media %}
+            <div class="swiper-slide w-1/5 h-full opacity-50">
+              {% render 'component-media', media: media %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="basis-full lg:basis-2/5">
+      <div class="mb-4">{{ product.description }}</div>
+      <div class="mb-4">Key: {{ product.key }}</div>
+      {% render 'component-add-to-cart-button', variantProp: product, isQuantityShownProp: true, isVariantShownProp: true %}
+    </div>
+  </div>
+
+  {% render 'component-cart-notification' %}
+
+</div>
+
+<script>
+  const swiper = new Swiper(".mySwiperMobile", {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    }
+  });
+  const swiper2 = new Swiper(".mySwiperWeb", {
+    spaceBetween: 20,
+    slidesPerView: 3.5,
+    freeMode: true
+  });
+  const swiper3 = new Swiper(".mySwiperWeb2", {
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    thumbs: {
+      swiper: swiper2
+    }
+  });
+</script>

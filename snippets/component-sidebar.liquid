@@ -1,0 +1,34 @@
+<div class="transform duration-500 h-screen w-screen top-0 left-0 p-10 bg-zinc-800 absolute rounded-xl text-black-400 flex flex-col gap-7 z-10" :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl">{{ section.settings.sidebar_title }}</h1>
+    <button @click="isSidebarOpen = false" class="text-white bg-zinc-800 hover:bg-green-700 rounded-full p-1">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+  {% render 'component-search-form' %}
+  <div class="flex flex-col">
+    {% for link in headerLinkProp %}
+
+      {% assign sidebar_link_handle = link.handle | replace: '-', '_' %}
+
+        <div x-data="{ {{ sidebar_link_handle }}: false }" class="flex flex-wrap items-center justify-between">
+        {% render 'component-header-link', linkProp: link %}
+
+        {% if link.links != blank %}
+          <div class="border-solid border-l-2">
+            <button @click="{{ sidebar_link_handle }} = ! {{ sidebar_link_handle }}" class="mx-2">
+              {% render 'icon-dropdown' %}
+            </button>
+          </div>
+        {% endif %}
+
+        {% comment %} Child links {% endcomment %}
+        <div x-show="{{ sidebar_link_handle }}" class="flex flex-col basis-full">
+          {% for childlink in link.links %}
+            {% render 'component-header-link', linkProp: childlink, isChildlinkProp: true %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

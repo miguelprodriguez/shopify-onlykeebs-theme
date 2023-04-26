@@ -1,0 +1,10 @@
+{% comment %} MOBILE HEADER {% endcomment %}
+<div class="flex items-center justify-between lg:hidden">
+  <button @click="isSidebarOpen = true" class="bg-zinc-800 hover:bg-green-700 rounded-full p-1">
+    {% render 'icon-hamburger' %}
+  </button>
+  <a class="inline-block hover:bg-zinc-700 no-underline rounded-md py-2 px-2" href="/">
+    OnlyKeebs
+  </a>
+  {% render 'component-nav-cart-button' %}
+</div>

@@ -1,0 +1,12 @@
+<form
+  action="/cart"
+  method="POST"
+  novalidate>
+  <div class="max-w-sm z-10 bg-zinc-800 rounded-xl p-8 fixed left-0 right-0 top-2.5 mx-auto md:left-auto md:right-2.5 cart-notification hidden"></div>
+</form>
+
+<script>
+  function closeCartNotification() {
+    document.querySelector('.cart-notification').classList.add('hidden')
+  }
+</script>

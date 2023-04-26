@@ -1,0 +1,258 @@
+<div data-all-products-url="{{ routes.all_products_collection_url }}" data-money-format="{{ shop.money_format }}">
+  <div class=" cart-container grid place-items-center py-64">
+    {% if cart.item_count > 0 %}
+      <div id="cart" class="container mx-auto p-8">
+        <h1 class="text-lg">Your cart</h1>
+        <form
+          action="{{routes.cart_url}}"
+          method="POST"
+          novalidate>
+          <table class="table-auto divide-y divide-white-200 my-4 w-full">
+            <thead>
+              <th class="py-3 text-left text-sm">Product</th>
+              <th class="py-3 text-left text-sm hidden lg:table-cell">Quantity</th>
+              <th class="py-3 text-left text-sm">Total</th>
+            </thead>
+
+            <tbody>
+              {% for item in cart.items %}
+                <tr class="table-row cart-item" data-key="{{ item.key }}">
+                  <td class="py-4 px-2 flex flex-col justify-center">
+                    <a href="{{ item.url }}">
+                      {% if item.image %}
+                        <img
+                          src="{{item.image | img_url: 'small'}}"
+                          alt="{{item.title | escape}}"
+                          class="w-20 h-20 object-cover border">
+                      {% else %}
+                        {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover border' }}
+                      {% endif %}
+                      {{ item.product.title }}
+
+                    </a>
+                    <button class="remove-item text-sm font-medoum text-red-500 my-1">
+                      remove
+                    </button>
+                  </td>
+                  <td class="hidden lg:table-cell">
+                    <div class="cart-quantity-selector flex align-center">
+                      <button type="button" class="minus rounded-l-xl border-2 border-white p-2">
+                        {% render 'icon-minus' %}
+                      </button>
+                      <input
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        id="updates_{{ forloop.index }}"
+                        class="w-20-border p-2 text-black outline-none">
+                      <button type="button" class="plus rounded-r-xl border-2 border-white p-2">
+                        {% render 'icon-plus' %}
+                      </button>
+                    </div>
+                  </td>
+                  <td class="py-4 px-2 cart-item " data-key="{{ item.key }}">
+                    <p class="line-item-price">
+                      {{ item.line_price | money }}
+                    </p>
+                    <input
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="1"
+                      id="updates_{{ forloop.index }}"
+                      class="w-20-border p-2 text-black table-cell rounded-md outline-none lg:hidden my-4">
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="w-full my-4 md:w-80">
+              <h3 class="text-xl">
+                Total:
+                <span id="total-price">{{ cart.total_price | money }}</span>
+              </h3>
+              <div class="my-2">
+                <button
+                  type="submit"
+                  name="checkout"
+                  class="w-full p-3 border border-gray-600 font-medium text-black bg-white">Checkout</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="empty-cart"></div>
+    {% else %}
+      <div class="container mx-auto flex items-center justify-center">
+        <div class="text-center">
+          <h1 class="text-3xl my-4">Your cart is empty</h1>
+          <div class="my-4 py-4">
+            <a href="{{ routes.all_products_collection_url }}" class="border border-gray-600 text-white bg-gray-600 px-8 py-3">
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  document
+    .querySelectorAll('.cart-quantity-selector button')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        const quantityInput = button.parentElement.querySelector('input')
+        const currrentValue = Number(quantityInput.value)
+
+        const key = button.closest('.cart-item').getAttribute("data-key")
+
+        const isPlus = button.classList.contains('plus')
+        if (isPlus) {
+          const updatedValue = quantityInput.value = currrentValue + 1
+          changeItemQuantity(key, updatedValue)
+        } else if (quantityInput.value > 1) {
+          const updatedValue = quantityInput.value = currrentValue - 1
+          changeItemQuantity(key, updatedValue)
+        }
+      })
+    })
+
+    document
+    .querySelectorAll('.remove-item')
+    .forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        const lineItem = item.closest('.cart-item')
+        const key = item
+          .closest('.cart-item')
+          .getAttribute("data-key")
+
+          axios
+          .post('/cart/change.js', {
+            id: key,
+            quantity: 0
+          })
+          .then(res => {
+            if (res.data.items.length === 0) {
+              document.querySelector("#cart").remove()
+              const route = document.querySelector('[data-all-products-url]').getAttribute('data-all-products-url')
+
+              const cartContainer = document.querySelector('.cart-container')
+              cartContainer.innerHTML = `
+                <div class="container mx-auto flex items-center justify-center">
+                <div class="text-center">
+                  <h1 class="text-3xl my-4">Your cart is empty</h1>
+                  <div class="my-4 py-4">
+                    <a href="${route}" class="border border-gray-600 text-white bg-gray-600 px-8 py-3">
+                      Continue Shopping
+                    </a>
+                  </div>
+                </div>
+              </div>
+                `
+            } else {
+              const format = document.querySelector('[data-money-format]').getAttribute('data-money-format')
+              const totalPrice = res
+                .data
+                .total_price
+
+                document
+                .querySelector('#total-price')
+                .textContent = formatMoney(totalPrice, format)
+              lineItem.remove()
+            }
+          })
+      })
+    })
+
+  const changeItemQuantity = (key, quantity) => {
+    axios.post('/cart/change.js', {
+      id: key,
+      quantity: quantity
+    }).then(res => {
+      const format = document.querySelector('[data-money-format]').getAttribute('data-money-format')
+      const totalPrice = res.data.total_price
+      const item = res
+        .data
+        .items
+        .find(item => item.key === key)
+        console
+        .log("Item: ", item)
+      const itemPrice = item.final_line_price
+
+      document.querySelector('#total-price').textContent = formatMoney(totalPrice, format)
+      document.querySelector(`[data-key="${key}"] .line-item-price`).textContent = formatMoney(itemPrice, format)
+    })
+  }
+
+  const formatMoney = (cents, format) => {
+    if (typeof cents == 'string') {
+      cents = cents.replace('.', '');
+    }
+    var value = '';
+    var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+    var formatString = (format || this.money_format);
+
+    const defaultOption = (opt, def) => {
+      return(
+        typeof opt == 'undefined'
+          ? def
+          : opt
+      );
+    }
+
+    const formatWithDelimiters = (number, precision, thousands, decimal) => {
+      precision = defaultOption(precision, 2);
+      thousands = defaultOption(thousands, ',');
+      decimal = defaultOption(decimal, '.');
+
+      if (isNaN(number) || number == null) {
+        return 0;
+      }
+
+      number = (number / 100.0).toFixed(precision);
+
+      var parts = number.split('.'),
+        dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+        cents = parts[1]
+          ? (decimal + parts[1])
+          : '';
+
+      return dollars + cents;
+    }
+
+    switch (formatString.match(placeholderRegex)[1]) {
+      case 'amount': value = formatWithDelimiters(cents, 2);
+        break;
+      case 'amount_no_decimals': value = formatWithDelimiters(cents, 0);
+        break;
+      case 'amount_with_comma_separator': value = formatWithDelimiters(cents, 2, '.', ',');
+        break;
+      case 'amount_no_decimals_with_comma_separator': value = formatWithDelimiters(cents, 0, '.', ',');
+        break;
+    }
+
+    return formatString.replace(placeholderRegex, value);
+  };
+</script>
+
+{% schema %}
+  {
+    "name": "Template Cart",
+    "blocks": [
+      {
+        "type": "subtotal",
+        "name": "Subtotal",
+        "limit": 1
+      }, {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}

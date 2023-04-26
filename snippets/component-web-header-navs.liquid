@@ -1,0 +1,45 @@
+<div class="hidden lg:flex justify-between items-center">
+  <a class="inline-block hover:bg-zinc-700 no-underline rounded-md py-2 px-2" href="{{ routes.root_url }}">
+    OnlyKeebs
+  </a>
+  <div class="flex gap-x-5">
+    {% for link in headerLinkProp %}
+      {% assign link_handle = link.handle | replace: '-', '_' %}
+
+      <div class="flex relative" x-data="{ {{ link_handle }}: false }">
+        {% render 'component-header-link', linkProp: link %}
+          {% if link.links != blank %}
+          <button @click="{{ link_handle }} = ! {{ link_handle }}">
+            {% render 'icon-dropdown' %}
+          </button>
+          {% comment %} sublinks {% endcomment %}
+          <div
+            x-show="{{ link_handle }}"
+            @click.away="{{ link_handle }} = false"
+            class="absolute top-full z-10 -ml-5 transform px-2 w-screen max-w-md lg:left-1/2 lg:-translate-x-1/2">
+            <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
+              <div class="flex flex-col gap-6 p-6 bg-white">
+                {% for childLink in link.links %}
+                  <a href="{{ childLink.url }}" class="-m-3 p-3 flex items start rounded-lg hover:bg-gray-100">
+                    <div class="ml-4">
+                      <p class="text-gray-900 text-base font-medium">
+                        {{ childLink.title }}
+                      </p>
+                    </div>
+                  </a>
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="flex gap-x-5">
+    <button @click="isSearchOpen = true" class="bg-zinc-800 hover:bg-green-700 rounded-full p-1">
+      {% render 'icon-search' %}
+    </button>
+    {% render 'component-nav-cart-button' %}
+  </div>
+</div>
