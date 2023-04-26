@@ -17,7 +17,7 @@
  
   <div class="{% if collection.products.size > 2 %} grid grid-cols-1 md:grid-cols-3 {%else%} justify-center flex flex-wrap md:flex-nowrap{% endif %} gap-5">
     {% for product in collection.products %}
-      <div class="product" data-id="{{ product.first_available_variant.id }}">
+      <div class="product w-full" data-id="{{ product.first_available_variant.id }}">
       {% render 'component-card', productProp: product, isAddtoCartButtonShownProp: section.settings.is_add_to_cart_buttons_shown %}
       </div>
     {% endfor %}
