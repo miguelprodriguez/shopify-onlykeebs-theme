@@ -8,11 +8,11 @@
     "landing": {
       "type": "landing-banner",
       "settings": {
-        "banner_title": "Title of the Banner",
-        "banner_description": "Description of the Banner",
-        "button_link": "",
+        "banner_title": "Wooden Case",
+        "banner_description": "65% Layout | Mahogany",
+        "button_link": "shopify:\/\/products\/65-wooden-case-and-wrist",
         "button_label": "Shop",
-        "banner_image": "shopify:\/\/shop_images\/maxresdefault.jpg"
+        "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp"
       }
     }
   },
