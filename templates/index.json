@@ -24,10 +24,22 @@
             "card_button_text": "Shop Linear",
             "card_button_link": "shopify:\/\/collections\/linear-switches"
           }
+        },
+        "012dddb5-f279-4012-b783-bcebbc93f13f": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify:\/\/shop_images\/clicky.webp",
+            "card_image_position": "left",
+            "card_title": "Clicky",
+            "card_description": "Clicky switches are a type of switch that focus on producing a tactile bump and loud audible click with each keystroke.  Loud and clicky switches offer great feedback when typing, so you know by the sound everything is working properly.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
         }
       },
       "block_order": [
-        "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a"
+        "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a",
+        "012dddb5-f279-4012-b783-bcebbc93f13f"
       ],
       "settings": {
         "sticky_title": "Switch Guide",
