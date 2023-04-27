@@ -1,10 +1,10 @@
 {
   "sections": {
-    "main": {
-      "type": "template-featured-collection",
-      "settings": {
-      }
-    },
+    // "main": {
+    //   "type": "template-featured-collection",
+    //   "settings": {
+    //   }
+    // },
     "landing": {
       "type": "landing-banner",
       "settings": {
@@ -20,7 +20,7 @@
     }
   },
   "order": [
-    "main",
+    // "main",
     "landing",
     "imageWithText"
   ]

@@ -1,4 +1,4 @@
-<div class="transform w-screen duration-500 py-7 px-10 absolute top-0 left-0 bg-black text-white flex flex-col flex-initial" :class="isSearchOpen ? 'translate-y-0' : '-translate-y-full'">
+<div class="transform w-screen duration-500 p-10 absolute top-0 left-0 bg-black text-white flex flex-col flex-initial" :class="isSearchOpen ? 'translate-y-0' : '-translate-y-full'">
   <div class="flex items-center justify-center flex-1 gap-4">
     {% assign placeholder = section.settings.search_placeholder %}
     {% render 'component-search-form', placeholderProp: placeholder %}
