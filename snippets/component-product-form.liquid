@@ -13,7 +13,7 @@
         {% for variant in variantProp.variants %}
           {% if variant.available %}
             <option value="{{ variant.id }}">
-              {{ variant.title }} - {{ variant.price | money_with_currency }}
+              {{ variant.title }} - {{ variant.price | money }}
             </option>
           {% else %}
             <option disabled="disabled">

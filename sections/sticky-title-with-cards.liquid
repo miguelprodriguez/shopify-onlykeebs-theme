@@ -1,0 +1,97 @@
+<div class="bg-zinc-700 pt-12 ">
+  <div class="md:flex {%if section.settings.title_position == 'right'%} flex-row-reverse{%endif%} gap-4 items-start container mx-auto p-8">
+    <div class="max-h-min md:sticky mb-4 top-32">
+      <h2 class="text-justify text-7xl font-extrabold ">
+        {{ section.settings.sticky_title }}
+      </h2>
+      <p class="hidden md:block text-lg">{{ section.settings.sticky_description }}</p>
+    </div>
+    <div>
+      {% for card in section.blocks %}
+        {% render 'component-card-sticky', cardProp: card.settings %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sticky Title with Cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sticky_title",
+        "default": "Switch Guide",
+        "label": "Title that will stick on the section"
+      }, {
+        "type": "text",
+        "id": "sticky_description",
+        "default": "Here are some cards.",
+        "label": "Text that will appear below the title"
+      }, {
+        "type": "select",
+        "id": "title_position",
+        "label": "Title Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "limit": 10,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "card_image",
+            "label": "Card Image"
+          },
+          {
+            "type": "select",
+            "id": "card_image_position",
+            "label": "Image Position",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              }, {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "text",
+            "id": "card_title",
+            "default": "Lorem Ipsum",
+            "label": "Card Title"
+          },
+          {
+            "type": "text",
+            "id": "card_description",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "label": "Card Description"
+          }, {
+            "type": "text",
+            "id": "card_button_text",
+            "label": "Card button text"
+          }, {
+            "type": "url",
+            "id": "card_button_link",
+            "label": "Card button link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

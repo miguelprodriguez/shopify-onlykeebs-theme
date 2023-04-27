@@ -1,0 +1,15 @@
+<div class="flex flex-wrap {% if cardProp.card_image_position == 'right'%} flex-row-reverse {%endif%} rounded-xl bg-white text-black items-center font-bold mb-4">
+  <img
+    src="{{ cardProp.card_image | image_url  }}"
+    alt="Linear Switch"
+    class="h-96 object-cover rounded-t-xl 2xl:rounded-none 2xl:rounded-l-xl flex-1">
+  <div class="container flex-1 h-full p-8">
+    <h2 class="text-5xl md:text-7xl py-8">
+      {{ cardProp.card_title }}.
+    </h2>
+    <p class="py-8 text-justify">{{ cardProp.card_description }}</p>
+    {% if cardProp.card_button_link %}
+      <a class="rounded-xl border-2 p-4 border-black block w-min" href="{{ cardProp.card_button_link }}">{{ cardProp.card_button_text }}</a>
+    {% endif %}
+  </div>
+</div>

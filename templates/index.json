@@ -1,10 +1,5 @@
 {
   "sections": {
-    // "main": {
-    //   "type": "template-featured-collection",
-    //   "settings": {
-    //   }
-    // },
     "landing": {
       "type": "landing-banner",
       "settings": {
@@ -15,13 +10,20 @@
         "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp"
       }
     }, 
-    "imageWithText": {
-      "type": "image-with-text"
+    "sticky_title_with_cards": {
+      "type": "sticky-title-with-cards",
+      "blocks": {
+        "title": {
+            "type": "component-card-sticky"
+        }
+    },
+    "block_order": [
+      "component-card-sticky"
+  ]
     }
   },
   "order": [
-    // "main",
     "landing",
-    "imageWithText"
+    "sticky_title_with_cards"
   ]
 }

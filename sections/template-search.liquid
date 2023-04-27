@@ -1,19 +1,21 @@
 <div class="container mx-auto p-8">
-  {% if section.settings.is_search_title_shown %}
-    <h1 class="text-3xl font-bold text-center my-8">Search results</h1>
-  {% endif %}
-  {% paginate search.results by 9 %}
+  {% paginate search.results by 3 %}
+    {% if section.settings.is_search_title_shown %}
+      <h1 class="text-3xl font-bold text-center my-8">Search results</h1>
+    {% endif %}
     <div class="flex justify-center items-center my-4 w-full">
       {% render 'component-search-form' %}
     </div>
 
     {% if search.performed %}
       {% if search.results.size > 0 %}
-        <div class="{% if search.results.size > 2 %} grid grid-cols-1 md:grid-cols-3 {%else%} justify-center flex flex-wrap md:flex-nowrap{% endif %} gap-5">
+        <div class="{% if search.results.size == 2 %} justify-center flex flex-wrap md:flex-nowrap  {%else%} grid grid-cols-1 md:grid-cols-3 {% endif %} gap-5">
           {% for result in search.results %}
             {% case result.object_type %}
               {% when 'product' %}
-              {% render 'component-card', productProp: result, indexProp: forloop.index, isAddtoCartButtonShownProp: section.settings.is_add_to_cart_buttons_shown %}
+              <div class="result w-full" data-id="{{ result.first_available_variant.id }}">
+                {% render 'component-card', productProp: result, indexProp: forloop.index, isAddtoCartButtonShownProp: section.settings.is_add_to_cart_buttons_shown %}
+              </div>
           {% else %}
             {% endcase %}
           {% endfor %}
@@ -25,15 +27,77 @@
       {% endif %}
     {% endif %}
 
-    {% comment %} {% render 'pagination', pagination: paginate %} {% endcomment %}
+    {% render 'component-cart-notification' %}
+    {% render 'component-pagination', pagination: paginate %}
+
   {% endpaginate %}
 </div>
+
+<script>
+  document.querySelectorAll('.cart-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+
+      const variantID = button
+        .closest('.result')
+        .getAttribute('data-id')
+
+        axios
+        .post('/cart/add.js', {
+          id: variantID,
+          quantity: 1
+        })
+        .then(res => {
+          const format = '{{ shop.money_format }}'
+
+          const cartNotification = document
+            .querySelector(".cart-notification")
+
+            cartNotification
+            .classList
+            .remove('hidden')
+            cartNotification
+            .innerHTML = `
+      <div class="flex justify-between">
+        <h2 class="text-large">Added to Cart</h2>
+        <button type="button" onClick="closeCartNotification()">X</button>
+      </div>
+      <div class="flex mb-8 items-center gap-2">
+        <img class="h-20 w-20" src="${
+            res.data.featured_image.url
+          }" alt="${
+            res.data.featured_image.alt
+          }">
+        <div>
+          <h3 class="cart-notification-price text-large">${
+            res.data.title
+          }</h3>
+          <p class="cart-notification-price text-large">Price: ${
+            formatMoney(res.data.final_line_price, format)
+          }</p>
+          <p class="cart-notification-quantity text-large">Quantity: ${
+            res.data.quantity
+          }</p>
+        </div>
+      </div>
+      <a class="text-white bg-green-700 hover:bg-green-600 rounded-xl p-4 z-10 w-full" href="/cart">View my cart</a>
+      <button type="submit" name="checkout">Checkout</button>
+      `
+        })
+    })
+  })
+</script>
 
 {% schema %}
   {
     "name": "Search",
     "settings": [
       {
+        "type": "number",
+        "id": "number_of_products_per_page",
+        "default": 6,
+        "label": "Number of products per page"
+      }, {
         "type": "checkbox",
         "id": "is_search_title_shown",
         "default": true,

@@ -5,7 +5,7 @@
     class="-z-1 brightness-[.20] absolute h-full min-w-full pointer-events-none object-cover">
 
   <div class="absolute h-full min-w-full w-full flex flex-col items-center justify-center">
-    <div class="container mx-auto p-8 flex flex-col items-start justify-center">
+    <div class="container mx-auto p-8 flex flex-col  justify-center {%if section.settings.horizontal_alignment == 'center'%} items-center {%elsif section.settings.horizontal_alignment == 'right'%} text-end items-end {%else %}items-start{%endif%}">
       <h1 class="text-7xl text-white font-black">{{ section.settings.banner_title }}</h1>
       <p class="text-3xl text-white">{{ section.settings.banner_description }}</p>
       <a class="flex hover:gap-2 hover:underline" href="{{ section.settings.button_link }}">
@@ -20,6 +20,12 @@
   {
     "name": "Landing page",
     "settings": [
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Banner Background",
+        "info": "Background that will appear on the banner"
+      },
       {
         "type": "text",
         "id": "banner_title",
@@ -38,18 +44,29 @@
         "type": "url",
         "id": "button_link",
         "label": "Button link"
-      },
-      {
+      }, {
         "type": "text",
         "id": "button_label",
         "label": "Button Label",
         "default": "View",
         "info": "Button Text"
       }, {
-        "type": "image_picker",
-        "id": "banner_image",
-        "label": "Banner Background",
-        "info": "Background that will appear on the banner"
+        "type": "select",
+        "id": "horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
       }
     ]
   }
