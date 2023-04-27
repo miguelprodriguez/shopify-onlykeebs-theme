@@ -19,7 +19,7 @@
           "settings": {
             "card_image": "shopify:\/\/shop_images\/linear.gif",
             "card_image_position": "left",
-            "card_title": "Linear",
+            "card_title": "Linear.",
             "card_description": "Linear switches are a type of switch that focus on producing a smooth, consistent actuation without any tactile feedback.  Linear switches are great for people who don’t like the small bump experienced from tactile switches or the loud noises from clicky switches.",
             "card_button_text": "Shop Linear",
             "card_button_link": "shopify:\/\/collections\/linear-switches"
@@ -30,7 +30,7 @@
           "settings": {
             "card_image": "shopify:\/\/shop_images\/clicky.webp",
             "card_image_position": "left",
-            "card_title": "Clicky",
+            "card_title": "Clicky.",
             "card_description": "Clicky switches are a type of switch that focus on producing a tactile bump and loud audible click with each keystroke.  Loud and clicky switches offer great feedback when typing, so you know by the sound everything is working properly.",
             "card_button_text": "",
             "card_button_link": ""
@@ -41,7 +41,7 @@
           "settings": {
             "card_image": "shopify:\/\/shop_images\/tacttile.gif",
             "card_image_position": "right",
-            "card_title": "Tactile",
+            "card_title": "Tactile.",
             "card_description": "Tactile switches are a type of switch that focus on producing a tactile bump and a relatively quiet audible click with each keystroke.  Tactile switches offer great feedback when typing, so you know by the sound and feel everything is working properly and all of your keystrokes are getting logged.",
             "card_button_text": "",
             "card_button_link": ""
