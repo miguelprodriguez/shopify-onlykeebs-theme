@@ -3,15 +3,37 @@
     "main": {
       "type": "featured-product",
       "settings": {
+        "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp",
         "banner_title": "Wooden Case",
         "banner_description": "65% Layout | Mahogany",
         "button_link": "shopify:\/\/products\/65-wooden-case-and-wrist",
         "button_label": "Shop",
-        "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp"
+        "horizontal_alignment": "left"
       }
-    }, 
+    },
     "sticky-title-with-cards": {
-      "type": "sticky-title-with-cards"
+      "type": "sticky-title-with-cards",
+      "blocks": {
+        "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify:\/\/shop_images\/linear.gif",
+            "card_image_position": "left",
+            "card_title": "Linear",
+            "card_description": "Linear switches are a type of switch that focus on producing a smooth, consistent actuation without any tactile feedback.  Linear switches are great for people who don’t like the small bump experienced from tactile switches or the loud noises from clicky switches.",
+            "card_button_text": "Shop Linear",
+            "card_button_link": "shopify:\/\/collections\/linear-switches"
+          }
+        }
+      },
+      "block_order": [
+        "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a"
+      ],
+      "settings": {
+        "sticky_title": "Switch Guide",
+        "sticky_description": "Here are some cards.",
+        "title_position": "left"
+      }
     }
   },
   "order": [
