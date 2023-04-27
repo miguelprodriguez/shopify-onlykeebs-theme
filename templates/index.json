@@ -35,11 +35,23 @@
             "card_button_text": "",
             "card_button_link": ""
           }
+        },
+        "eb1a10e3-34f6-4631-8fcf-474aa833a078": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify:\/\/shop_images\/tacttile.gif",
+            "card_image_position": "right",
+            "card_title": "Tactile",
+            "card_description": "Tactile switches are a type of switch that focus on producing a tactile bump and a relatively quiet audible click with each keystroke.  Tactile switches offer great feedback when typing, so you know by the sound and feel everything is working properly and all of your keystrokes are getting logged.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
         }
       },
       "block_order": [
         "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a",
-        "012dddb5-f279-4012-b783-bcebbc93f13f"
+        "012dddb5-f279-4012-b783-bcebbc93f13f",
+        "eb1a10e3-34f6-4631-8fcf-474aa833a078"
       ],
       "settings": {
         "sticky_title": "Switch Guide",
