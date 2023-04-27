@@ -3,7 +3,7 @@
   method="post"
   class="text-black flex flex-col gap-4"
   ></form>
-  {% if variantProp.variants.size > 1 and isVariantShownProp %}
+  {% if variantProp.variants.size > 1 %}
     <div>
       <label class="text-white" for="productSelect">
         <strong>Variant</strong>
@@ -30,7 +30,6 @@
       value="{{ variantProp.variants.first.id }}" />
   {% endif %}
 
-  {% if isQuantityShownProp %}
     <div>
       <label class="text-white" for="quantity">
         <strong>Quantity</strong>
@@ -44,8 +43,6 @@
         value="1"
         min="1">
     </div>
-  {% endif %}
-
 
   <button
     class="add-to-cart bg-green-700 text-white hover:bg-green-600 rounded-xl p-4 z-10 w-full"
@@ -55,7 +52,6 @@
     id="AddToCart">Add to cart</button>
 </form>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   document.querySelector('.add-to-cart').addEventListener('click', (e) => {
     e.preventDefault()

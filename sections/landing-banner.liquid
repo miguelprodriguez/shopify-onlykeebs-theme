@@ -1,4 +1,3 @@
-{% comment %} bg-[url('{{ section.settings.banner_image | image_url }})'']  {% endcomment %}
 <div class="relative bg-black min-h-[32rem] min-w-full">
   <img
     src="{{ section.settings.banner_image | image_url }}"
@@ -7,9 +6,12 @@
 
   <div class="absolute h-full min-w-full w-full flex flex-col items-center justify-center">
     <div class="container mx-auto p-8 flex flex-col items-start justify-center">
-      <h1 class="text-7xl text-white">{{ section.settings.banner_title }}</h1>
+      <h1 class="text-7xl text-white font-black">{{ section.settings.banner_title }}</h1>
       <p class="text-3xl text-white">{{ section.settings.banner_description }}</p>
-      <a href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+      <a class="flex hover:gap-2 hover:underline" href="{{ section.settings.button_link }}">
+        {{ section.settings.button_label }}
+        {% render 'icon-right' %}
+      </a>
     </div>
   </div>
 </div>
@@ -41,7 +43,7 @@
         "type": "text",
         "id": "button_label",
         "label": "Button Label",
-        "default": "Shop",
+        "default": "View",
         "info": "Button Text"
       }, {
         "type": "image_picker",

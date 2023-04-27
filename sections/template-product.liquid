@@ -85,8 +85,7 @@
 
     <div class="basis-full lg:basis-2/5">
       <div class="mb-4">{{ product.description }}</div>
-      <div class="mb-4">Key: {{ product.key }}</div>
-      {% render 'component-add-to-cart-button', variantProp: product, isQuantityShownProp: true, isVariantShownProp: true %}
+      {% render 'component-product-form', variantProp: product %}
     </div>
   </div>
 
