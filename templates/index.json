@@ -1,7 +1,7 @@
 {
   "sections": {
-    "landing": {
-      "type": "landing-banner",
+    "main": {
+      "type": "featured-product",
       "settings": {
         "banner_title": "Wooden Case",
         "banner_description": "65% Layout | Mahogany",
@@ -10,20 +10,12 @@
         "banner_image": "shopify:\/\/shop_images\/31_900x_81c72cd8-d24a-4031-a718-8dbc92a32b2b.webp"
       }
     }, 
-    "sticky_title_with_cards": {
-      "type": "sticky-title-with-cards",
-      "blocks": {
-        "title": {
-            "type": "component-card-sticky"
-        }
-    },
-    "block_order": [
-      "component-card-sticky"
-  ]
+    "sticky-title-with-cards": {
+      "type": "sticky-title-with-cards"
     }
   },
   "order": [
-    "landing",
-    "sticky_title_with_cards"
+    "main",
+    "sticky-title-with-cards"
   ]
 }
