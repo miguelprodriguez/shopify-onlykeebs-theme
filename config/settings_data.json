@@ -142,8 +142,8 @@
         "type": "footer",
         "settings": {
           "menu": "footer",
-          "is_show_enabled_payments": true,
-          "is_show_copyright_and_powered_by_shopify": true
+          "is_show_enabled_payments": false,
+          "is_show_copyright_and_powered_by_shopify": false
         }
       }
     },
