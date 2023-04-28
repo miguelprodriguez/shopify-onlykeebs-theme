@@ -18,8 +18,8 @@
           "type": "card",
           "settings": {
             "card_image": "shopify:\/\/shop_images\/linear.gif",
-            "card_image_position": "left",
-            "card_title": "Linear.",
+            "card_image_position": "right",
+            "card_title": "Linear",
             "card_description": "Linear switches are a type of switch that focus on producing a smooth, consistent actuation without any tactile feedback.  Linear switches are great for people who don’t like the small bump experienced from tactile switches or the loud noises from clicky switches.",
             "card_button_text": "Shop Linear",
             "card_button_link": "shopify:\/\/collections\/linear-switches"
@@ -46,17 +46,94 @@
             "card_button_text": "",
             "card_button_link": ""
           }
+        },
+        "3404960f-cfc9-4b1b-8e0d-6b2e00b252ba": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "2928ee89-c733-43bf-9f87-e8f1b47ffd09": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "950e5ea4-cd74-481d-a7e3-b5c86efa894a": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "1b164c21-90e5-43f0-8149-fc978fe7383d": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "2232570f-a4b5-46b6-814b-20c8963c1d25": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "80177d44-ee72-46b8-a884-ff1a4bcf52cd": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
+        },
+        "aeacb84c-0b30-4ec4-ad64-f105f8517da3": {
+          "type": "card",
+          "settings": {
+            "card_image_position": "left",
+            "card_title": "Lorem Ipsum",
+            "card_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "card_button_text": "",
+            "card_button_link": ""
+          }
         }
       },
       "block_order": [
         "03b1c0b0-aa2a-4dc7-93be-ed07cc76ae9a",
         "012dddb5-f279-4012-b783-bcebbc93f13f",
-        "eb1a10e3-34f6-4631-8fcf-474aa833a078"
+        "eb1a10e3-34f6-4631-8fcf-474aa833a078",
+        "3404960f-cfc9-4b1b-8e0d-6b2e00b252ba",
+        "2928ee89-c733-43bf-9f87-e8f1b47ffd09",
+        "950e5ea4-cd74-481d-a7e3-b5c86efa894a",
+        "1b164c21-90e5-43f0-8149-fc978fe7383d",
+        "2232570f-a4b5-46b6-814b-20c8963c1d25",
+        "80177d44-ee72-46b8-a884-ff1a4bcf52cd",
+        "aeacb84c-0b30-4ec4-ad64-f105f8517da3"
       ],
       "settings": {
-        "sticky_title": "Switch Guide",
-        "sticky_description": "Here are some cards.",
-        "title_position": "left"
+        "sticky_title": "Switch Guide Title",
+        "sticky_description": "Here are some cards",
+        "title_position": "right"
       }
     }
   },
