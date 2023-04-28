@@ -127,13 +127,15 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
-          "announcement_text": "Welcome!"
+          "announcement_text": "Welcome to my shop"
         }
       },
       "header": {
         "type": "header",
         "settings": {
-          "menu": "main-menu"
+          "menu": "main-menu",
+          "search_placeholder": "Search here",
+          "sidebar_title": "OnlyKeebs"
         }
       },
       "footer": {
